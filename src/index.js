@@ -18,7 +18,7 @@ app.use(cookieParser());
 //Routes
 
 //get all emp
-app.get("/employee/:key",apiauth,auth, async (req, res) => {
+app.get("/employee/",auth, async (req, res) => {
   try {
     const e=`select getemp2()`;
     const allemp = await pool.query(e);
