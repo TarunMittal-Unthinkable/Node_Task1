@@ -120,7 +120,7 @@ app.post("/signup", async (req, res) => {
         expiresIn: 86400 // 24 hours
       }); 
       res.cookie("jwt",token,{
-        expires:new Date(Date.now()+30000),
+        expires:new Date(Date.now()+80000),
         httpOnly:true
       });
       
