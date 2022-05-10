@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const pool = require("../db");
-// const pool=require("dotenv").config();
+
 const bcrypt=require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const config = require("../src/auth.config");
@@ -145,8 +145,9 @@ app.post("/login", rateLimit,async (req, res) => {
     const { email } = req.body;
     const { password } = req.body;
     const hash1= await bcrypt.hash(password,10);
-    const newemp1 = await pool.query('select * from register where email=$1', [email]);
-    const isMatch=await bcrypt.compare(password,newemp1.rows[0].password);
+    const getuser=`select getuser($1)`;
+    const newemp1 = await pool.query(getuser, [email]);
+    const isMatch=await bcrypt.compare(password,newemp1.rows[0].getuser);
     const token = await jwt.sign({ _id: hash1}, config.secret, {
       expiresIn: 86400 // 24 hours
     }); 
