@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const pool = require("../db");
+// const pool=require("dotenv").config();
 const bcrypt=require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const config = require("../src/auth.config");
