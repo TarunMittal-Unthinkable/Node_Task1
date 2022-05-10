@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../src/auth.config");
 const cookieParser=require('cookie-parser');
 const auth=require("./middleware/auth");
+const apiauth=require("./middleware/api_auth");
 const rateLimit=require("./middleware/ratelimit");
 
 const port=process.env.PORT || 3000;
@@ -17,7 +18,7 @@ app.use(cookieParser());
 //Routes
 
 //get all emp
-app.get("/employee",auth, async (req, res) => {
+app.get("/employee/:key",apiauth,auth, async (req, res) => {
   try {
     const e=`select getemp2()`;
     const allemp = await pool.query(e);
